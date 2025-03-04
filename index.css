@@ -1,0 +1,289 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos globais */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #e5e4d2; /* Tom mais claro para o fundo geral */
+    color: #454f31; /* Cor do texto principal: tom mais escuro da paleta */
+    line-height: 1.8; /* Aumentei o line-height para melhor leitura */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px; /* Aumentei padding superior e inferior */
+    transition: background-color 0.3s ease; /* Transição suave na cor de fundo do body */
+}
+
+.container {
+    background-color: #fff; /* Container branco */
+    border-radius: 16px; /* Bordas mais arredondadas */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* Sombra mais suave e moderna */
+    padding: 40px; /* Padding interno maior para respiro */
+    max-width: 950px; /* Largura máxima */
+    width: 100%;
+    margin-bottom: 30px; /* Margem inferior maior */
+    opacity: 0.98; /* Ligeira redução da opacidade para um efeito suave */
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transições para container */
+}
+
+.container:hover {
+    opacity: 1; /* Opacidade total no hover */
+    transform: translateY(-5px); /* Leve elevação no hover */
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada no hover */
+}
+
+/* Header moderno */
+header {
+    margin-bottom: 40px; /* Aumentei a margem inferior do header */
+    text-align: center; /* Centralizar o título do header */
+    background-image: url('biblia.webp'); /* Adiciona a imagem de fundo */
+    background-size: cover; /* Cobre todo o espaço */
+    background-position: center; /* Centraliza a imagem */
+    padding: 80px 20px; /* Padding maior para destacar o conteúdo */
+    border-radius: 16px 16px 0 0; /* Bordas arredondadas no topo */
+    color: #fff; /* Texto branco para contraste */
+    position: relative; /* Necessário para o overlay */
+    overflow: hidden; /* Garante que o overlay não vaze as bordas */
+    min-height: 250px; /* Altura mínima para o header */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centralizar o conteúdo verticalmente */
+}
+
+/* Overlay para escurecer a imagem de fundo */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* Overlay mais escuro para melhor legibilidade */
+    z-index: 1; /* Garante que o overlay fique atrás do texto */
+    border-radius: 16px 16px 0 0; /* Bordas arredondadas no topo */
+}
+
+/* Garantir que o título e o subtítulo fiquem acima do overlay */
+header h1,
+header p {
+    position: relative; /* Coloca o texto acima do overlay */
+    z-index: 2; /* Garante que o texto fique na frente do overlay */
+    color: #e5e4d2; /* Texto branco */
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif; /* Mantendo Montserrat */
+    font-size: 2.8rem; /* Tamanho maior para o título */
+    font-weight: 700; /* Negrito */
+    line-height: 1.2;
+    letter-spacing: -0.02em; /* Espaçamento entre letras ajustado */
+    margin-bottom: 10px; /* Espaço abaixo do título */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); /* Sombra no texto para melhor legibilidade */
+    transition: transform 0.3s ease; /* Transição suave no hover */
+}
+
+header h1:hover {
+    transform: scale(1.02); /* Efeito de escala no hover */
+}
+
+header p {
+    font-family: 'Montserrat', sans-serif; /* Mantendo Montserrat */
+    font-size: 1.2rem; /* Tamanho maior para o subtítulo */
+    margin-top: 0;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* Sombra no texto */
+    transition: opacity 0.3s ease; /* Transição suave no hover */
+}
+
+header p:hover {
+    opacity: 0.9; /* Efeito de opacidade no hover */
+}
+
+/* Títulos das seções */
+.section-title {
+    font-family: 'Montserrat', sans-serif; /* Mantendo Montserrat */
+    font-size: 1.8rem; /* Tamanho maior */
+    color: #5d6840; /* Verde oliva médio */
+    margin-top: 40px; /* Margem superior maior */
+    margin-bottom: 20px;
+    font-weight: 600; /* Peso médio */
+    position: relative; /* Para a linha decorativa */
+    padding-bottom: 10px; /* Espaço para a linha decorativa */
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px; /* Comprimento da linha decorativa */
+    height: 3px; /* Espessura da linha */
+    background-color: #5d6840; /* Cor da linha */
+    border-radius: 3px; /* Arredondamento da linha */
+    transition: width 0.3s ease; /* Transição suave na largura */
+}
+
+.section-title:hover::after {
+    width: 80px; /* Aumenta o comprimento da linha no hover */
+}
+
+/* Blocos de conteúdo */
+section {
+    padding-bottom: 30px; /* Padding maior entre as seções */
+    margin-bottom: 30px; /* Margem inferior maior */
+    border-bottom: 1px dashed #e5e4d2; /* Divisor de seção em dashed e cor mais clara */
+    transition: border-color 0.3s ease; /* Transição suave na cor da borda */
+}
+
+section:hover {
+    border-color: #ccc; /* Escurece a cor da borda no hover */
+}
+
+section:last-child {
+    border-bottom: none; /* Remove o divisor da última seção */
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Blocos de citação */
+blockquote {
+    font-family: 'Montserrat', sans-serif; /* Mantendo Montserrat */
+    font-style: italic;
+    color: #5d6840; /* Verde oliva médio */
+    padding: 20px 25px; /* Padding maior */
+    margin: 25px 0; /* Margem maior */
+    border-left: 5px solid #5d6840; /* Borda esquerda mais destacada */
+    background-color: #f8f9fa; /* Fundo levemente mais escuro */
+    border-radius: 12px; /* Bordas arredondadas */
+    font-size: 1.2rem; /* Tamanho maior */
+    line-height: 1.6;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+}
+
+blockquote:hover {
+    background-color: #f0f0f0; /* Clareia levemente o fundo no hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada no hover */
+}
+
+/* Lista de aplicação */
+#aplicacao {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 20px; /* Margem superior para a lista */
+}
+
+#aplicacao li {
+    font-family: 'Montserrat', sans-serif; /* Mantendo Montserrat */
+    background-color: #f8f9fa; /* Fundo dos itens da lista */
+    margin: 12px 0; /* Margem maior para itens da lista */
+    padding: 15px 20px; /* Padding maior */
+    border-radius: 8px; /* Bordas arredondadas */
+    color: #454f31; /* Cor do texto */
+    font-size: 1rem;
+    line-height: 1.7;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.04); /* Sombra suave */
+    border: 1px solid #e5e4d2; /* Borda sutil */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
+}
+
+#aplicacao li:hover {
+    transform: translateY(-3px); /* Efeito de elevação no hover */
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.08); /* Sombra mais pronunciada no hover */
+}
+
+/* Oração */
+#oracao {
+    font-family: 'Montserrat', sans-serif; /* Mantendo Montserrat */
+    font-style: italic;
+    color: #454f31; /* Tom mais escuro */
+    margin: 25px 0; /* Margem maior */
+    padding: 20px; /* Padding maior */
+    background-color: #f8f9fa; /* Fundo levemente mais escuro */
+    border-radius: 12px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Sombra suave */
+    font-size: 1.1rem; /* Tamanho maior */
+    line-height: 1.7;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+}
+
+#oracao:hover {
+    background-color: #f0f0f0; /* Clareia levemente o fundo no hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07); /* Sombra mais pronunciada no hover */
+}
+
+/* Footer */
+footer {
+    font-family: 'Montserrat', sans-serif; /* Mantendo Montserrat */
+    text-align: center;
+    padding: 25px; /* Padding maior */
+    background-color: #e5e4d2; /* Cor de fundo */
+    color: #454f31; /* Cor do texto */
+    border-top: none; /* Remove a borda superior */
+    width: 100%;
+    max-width: 950px; /* Largura máxima */
+    margin-top: 30px; /* Margem superior maior */
+    border-radius: 12px; /* Bordas arredondadas */
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.05); /* Sombra suave acima do footer */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+}
+
+footer:hover {
+    background-color: #d8d7c7; /* Escurece levemente o fundo no hover */
+    box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.07); /* Sombra mais pronunciada no hover */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.4rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        padding: 30px;
+    }
+
+    blockquote, #oracao {
+        padding: 15px 20px;
+        font-size: 1.1rem;
+    }
+    header {
+        padding: 60px 15px; /* Reduz o padding do header em telas menores */
+        min-height: 200px; /* Reduz altura mínima do header */
+    }
+    header h1 {
+        font-size: 2.2rem; /* Reduz o tamanho do título */
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    blockquote, #oracao {
+        font-size: 1rem;
+    }
+    header {
+        padding: 50px 10px; /* Reduz ainda mais o padding do header */
+        min-height: 180px; /* Reduz altura mínima do header */
+    }
+    header h1 {
+        font-size: 1.8rem; /* Reduz ainda mais o tamanho do título */
+    }
+}
