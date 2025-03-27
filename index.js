@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         oracaoElement.textContent = versiculoData.oracao;
     }
 
-    // Função para seleção sequencial do versículo (usando sessionStorage)
+    // Seleção sequencial do versículo usando sessionStorage
     function selecionarVersiculoSequencial(versiculos) {
         const hoje = new Date().toLocaleDateString();
         const savedData = sessionStorage.getItem('versiculoData');
@@ -113,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Função para exibir até 3 perguntas (não respondidas hoje) de forma aleatória
     function exibirPerguntas() {
         const hoje = new Date().toLocaleDateString();
-        // Recupera do sessionStorage as perguntas já respondidas hoje
         const savedPerguntas = sessionStorage.getItem('answeredPerguntas');
         let answered = [];
         if (savedPerguntas) {
@@ -126,9 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Erro ao parsear answeredPerguntas:', error);
             }
         }
-        // Filtra as perguntas que ainda não foram respondidas hoje
         const perguntasDisponiveis = perguntas.filter(q => !answered.includes(q.id));
-        // Seleciona aleatoriamente até 3 perguntas
         const numeroPerguntas = Math.min(3, perguntasDisponiveis.length);
         const perguntasSelecionadas = [];
         while (perguntasSelecionadas.length < numeroPerguntas) {
@@ -138,25 +135,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 perguntasSelecionadas.push(pergunta);
             }
         }
-        // Renderiza as perguntas no container
         const container = document.getElementById('perguntasContainer');
-        container.innerHTML = ''; // Limpa o container
-
+        container.innerHTML = '';
         perguntasSelecionadas.forEach(pergunta => {
             const div = document.createElement('div');
             div.classList.add('pergunta-item');
 
-            // Cria o label com o texto da pergunta
+            // Label com o texto da pergunta
             const label = document.createElement('label');
             label.setAttribute('for', `pergunta_${pergunta.id}`);
             label.textContent = pergunta.question;
             div.appendChild(label);
 
-            // Cria o input com o atributo name igual ao texto da pergunta
+            // Input: se for text ou radio, usa o texto da pergunta como "name"
             if (pergunta.type === "text") {
                 const textarea = document.createElement('textarea');
                 textarea.id = `pergunta_${pergunta.id}`;
-                textarea.name = pergunta.question; // Nome com o texto da pergunta
+                textarea.name = pergunta.question;
                 textarea.required = true;
                 div.appendChild(textarea);
             } else if (pergunta.type === "choice") {
@@ -166,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const radio = document.createElement('input');
                     radio.type = 'radio';
                     radio.id = `pergunta_${pergunta.id}_opcao_${index}`;
-                    radio.name = pergunta.question; // Nome com o texto da pergunta
+                    radio.name = pergunta.question;
                     radio.value = opcao;
                     radio.required = true;
                     const radioLabel = document.createElement('label');
@@ -181,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Ao submeter o formulário de perguntas, atualiza o sessionStorage com os IDs respondidos
+    // Atualiza o sessionStorage ao submeter o formulário
     const perguntasForm = document.getElementById('perguntasForm');
     perguntasForm.addEventListener('submit', function (event) {
         const inputs = perguntasForm.querySelectorAll('[id^="pergunta_"]');
@@ -205,9 +200,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         answered.ids = Array.from(new Set(answered.ids.concat(respondedIds)));
         sessionStorage.setItem('answeredPerguntas', JSON.stringify(answered));
-        // O formulário segue para o Formspree
+        // O formulário seguirá para o Formspree
     });
 
-    // Chama a função para exibir as perguntas
+    // Exibe as perguntas ao carregar
     exibirPerguntas();
 });
