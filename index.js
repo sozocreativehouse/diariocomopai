@@ -1,13 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Elementos do Versículo e demais seções
     const versiculoElement = document.getElementById('versiculo');
     const reflexaoElement = document.getElementById('reflexao');
     const aplicacaoElement = document.getElementById('aplicacao');
     const desafioElement = document.getElementById('desafio');
     const oracaoElement = document.getElementById('oracao');
     const headerTitle = document.querySelector('header h1');
+    const temaElement = document.getElementById('tema');
 
+    // Função para exibir o versículo e demais conteúdos
     function exibirVersiculo(versiculoData) {
         headerTitle.textContent = versiculoData.titulo;
+        temaElement.textContent = versiculoData.tema;
         versiculoElement.textContent = versiculoData.versiculo;
         reflexaoElement.textContent = versiculoData.reflexao;
         aplicacaoElement.innerHTML = versiculoData.aplicacao.split('. ').map(item => `<li>${item}</li>`).join('');
@@ -15,37 +19,29 @@ document.addEventListener('DOMContentLoaded', function () {
         oracaoElement.textContent = versiculoData.oracao;
     }
 
-    function selecionarVersiculoAleatorio(versiculos) {
+    // Função para seleção sequencial do versículo (usando sessionStorage)
+    function selecionarVersiculoSequencial(versiculos) {
         const hoje = new Date().toLocaleDateString();
-        const versiculoSalvo = localStorage.getItem('versiculoDoDia');
-        const dataSalva = localStorage.getItem('dataVersiculo');
-
-        if (versiculoSalvo && dataSalva === hoje) {
+        const savedData = sessionStorage.getItem('versiculoData');
+        let index = 0;
+        if (savedData) {
             try {
-                const versiculo = JSON.parse(versiculoSalvo);
-                if (versiculo && typeof versiculo === 'object') {
-                    exibirVersiculo(versiculo);
+                const dataObj = JSON.parse(savedData); // { date: string, index: number }
+                if (dataObj.date === hoje) {
+                    index = dataObj.index;
                 } else {
-                    throw new Error('Dados inválidos no localStorage');
+                    index = (dataObj.index + 1) % versiculos.length;
                 }
             } catch (error) {
-                console.error('Erro ao fazer parsing do versículo salvo:', error);
-                // Limpa o localStorage e seleciona um novo versículo
-                localStorage.removeItem('versiculoDoDia');
-                localStorage.removeItem('dataVersiculo');
-                selecionarVersiculoAleatorio(versiculos);
+                console.error('Erro ao fazer parsing do sessionStorage:', error);
+                index = 0;
             }
-        } else {
-            const indiceAleatorio = Math.floor(Math.random() * versiculos.length);
-            const versiculoDoDia = versiculos[indiceAleatorio];
-
-            localStorage.setItem('versiculoDoDia', JSON.stringify(versiculoDoDia));
-            localStorage.setItem('dataVersiculo', hoje);
-
-            exibirVersiculo(versiculoDoDia);
         }
+        sessionStorage.setItem('versiculoData', JSON.stringify({ date: hoje, index: index }));
+        exibirVersiculo(versiculos[index]);
     }
 
+    // Carrega os versículos
     fetch('index.json')
         .then(response => {
             if (!response.ok) {
@@ -54,15 +50,164 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then(versiculos => {
-            console.log('Versículos carregados:', versiculos); // Log para depuração
+            console.log('Versículos carregados:', versiculos);
             if (versiculos && Array.isArray(versiculos) && versiculos.length > 0) {
-                selecionarVersiculoAleatorio(versiculos);
+                selecionarVersiculoSequencial(versiculos);
             } else {
                 throw new Error('Nenhum versículo encontrado no arquivo JSON.');
             }
         })
         .catch(error => {
             console.error('Erro ao carregar index.json:', error);
-            versiculoElement.textContent = 'Erro ao carregar os versículos.'; // Mensagem de erro na página
+            versiculoElement.textContent = 'Erro ao carregar os versículos.';
         });
+
+    // -----------------------------
+    // Seção de Perguntas do Dia
+    // -----------------------------
+
+    // Array com 40 perguntas (cada objeto possui id, question, type e, se for de escolha, opções)
+    const perguntas = [
+        { id: 1, question: "Deus falou com você através da nossa plataforma hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 2, question: "Você se considera ansioso?", type: "choice", options: ["Sim", "Não", "Às vezes"] },
+        { id: 3, question: "Você se considera uma pessoa deprimida?", type: "choice", options: ["Sim", "Não", "Às vezes"] },
+        { id: 4, question: "Como foi sua experiência com Deus hoje?", type: "text" },
+        { id: 5, question: "Você sentiu a presença de Deus em sua oração?", type: "choice", options: ["Sim", "Não"] },
+        { id: 6, question: "Houve algum momento de inspiração divina para você hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 7, question: "Você compartilhou alguma palavra de fé com alguém hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 8, question: "Você se sentiu desanimado(a) em algum momento hoje?", type: "choice", options: ["Sim", "Não", "Às vezes"] },
+        { id: 9, question: "O quanto você se sente conectado(a) com Deus hoje?", type: "choice", options: ["Muito", "Pouco", "Nem um pouco"] },
+        { id: 10, question: "Você participou de alguma leitura bíblica hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 11, question: "Você meditou sobre a Palavra de Deus hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 12, question: "Qual foi o versículo que mais impactou você hoje?", type: "text" },
+        { id: 13, question: "Você orou sozinho(a) ou em grupo hoje?", type: "choice", options: ["Sozinho(a)", "Em grupo"] },
+        { id: 14, question: "Você sente que suas orações foram respondidas hoje?", type: "choice", options: ["Sim", "Não", "Parcialmente"] },
+        { id: 15, question: "Você teve dificuldade para manter a fé hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 16, question: "Você se sentiu fortalecido(a) espiritualmente hoje?", type: "choice", options: ["Sim", "Não", "Parcialmente"] },
+        { id: 17, question: "Como você descreveria sua jornada espiritual hoje?", type: "text" },
+        { id: 18, question: "Você teve algum sonho ou visão que lhe inspirou hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 19, question: "Você sentiu que Deus guiou suas decisões hoje?", type: "choice", options: ["Sim", "Não", "Parcialmente"] },
+        { id: 20, question: "Você percebeu alguma mudança positiva em seu comportamento hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 21, question: "Você se dedicou a alguma ação de serviço hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 22, question: "Você sentiu gratidão por algo hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 23, question: "O que você mais agradeceu hoje?", type: "text" },
+        { id: 24, question: "Você teve momentos de reflexão profunda hoje?", type: "choice", options: ["Sim", "Não", "Às vezes"] },
+        { id: 25, question: "Você participou de algum culto ou reunião virtual hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 26, question: "Você leu algum devocional ou mensagem edificante hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 27, question: "Como você avaliaria seu estado emocional hoje?", type: "choice", options: ["Ótimo", "Bom", "Regular", "Ruim"] },
+        { id: 28, question: "Você se sentiu inspirado(a) a ajudar alguém hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 29, question: "Você praticou alguma forma de meditação ou oração silenciosa hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 30, question: "Você sentiu que o Espírito Santo estava presente em suas ações hoje?", type: "choice", options: ["Sim", "Não", "Parcialmente"] },
+        { id: 31, question: "Qual o principal aprendizado espiritual que você teve hoje?", type: "text" },
+        { id: 32, question: "Você sentiu a paz de Deus em algum momento específico hoje?", type: "choice", options: ["Sim", "Não", "Às vezes"] },
+        { id: 33, question: "Você se sentiu motivado(a) a mudar algo em sua vida hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 34, question: "Você compartilhou sua fé com alguém hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 35, question: "Você leu ou ouviu alguma mensagem inspiradora hoje?", type: "choice", options: ["Sim", "Não", "Às vezes"] },
+        { id: 36, question: "Você se sentiu renovado(a) espiritualmente hoje?", type: "choice", options: ["Sim", "Não", "Parcialmente"] },
+        { id: 37, question: "Você dedicou tempo para refletir sobre sua vida espiritual hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 38, question: "Você sentiu a presença de Deus durante suas atividades diárias hoje?", type: "choice", options: ["Sim", "Não", "Às vezes"] },
+        { id: 39, question: "Você experimentou alguma emoção positiva relacionada à sua fé hoje?", type: "choice", options: ["Sim", "Não"] },
+        { id: 40, question: "Qual foi o maior desafio espiritual que você enfrentou hoje?", type: "text" }
+    ];
+
+    // Função para exibir até 3 perguntas (não respondidas hoje) de forma aleatória
+    function exibirPerguntas() {
+        const hoje = new Date().toLocaleDateString();
+        // Recupera do sessionStorage as perguntas já respondidas hoje
+        const savedPerguntas = sessionStorage.getItem('answeredPerguntas');
+        let answered = [];
+        if (savedPerguntas) {
+            try {
+                const obj = JSON.parse(savedPerguntas);
+                if (obj.date === hoje) {
+                    answered = obj.ids;
+                }
+            } catch (error) {
+                console.error('Erro ao parsear answeredPerguntas:', error);
+            }
+        }
+        // Filtra as perguntas que ainda não foram respondidas hoje
+        const perguntasDisponiveis = perguntas.filter(q => !answered.includes(q.id));
+        // Seleciona aleatoriamente até 3 perguntas
+        const numeroPerguntas = Math.min(3, perguntasDisponiveis.length);
+        const perguntasSelecionadas = [];
+        while (perguntasSelecionadas.length < numeroPerguntas) {
+            const indiceAleatorio = Math.floor(Math.random() * perguntasDisponiveis.length);
+            const pergunta = perguntasDisponiveis[indiceAleatorio];
+            if (!perguntasSelecionadas.find(q => q.id === pergunta.id)) {
+                perguntasSelecionadas.push(pergunta);
+            }
+        }
+        // Renderiza as perguntas no container
+        const container = document.getElementById('perguntasContainer');
+        container.innerHTML = ''; // Limpa o container
+
+        perguntasSelecionadas.forEach(pergunta => {
+            const div = document.createElement('div');
+            div.classList.add('pergunta-item');
+
+            // Cria o label com o texto da pergunta
+            const label = document.createElement('label');
+            label.setAttribute('for', `pergunta_${pergunta.id}`);
+            label.textContent = pergunta.question;
+            div.appendChild(label);
+
+            // Cria o input com o atributo name igual ao texto da pergunta
+            if (pergunta.type === "text") {
+                const textarea = document.createElement('textarea');
+                textarea.id = `pergunta_${pergunta.id}`;
+                textarea.name = pergunta.question; // Nome com o texto da pergunta
+                textarea.required = true;
+                div.appendChild(textarea);
+            } else if (pergunta.type === "choice") {
+                pergunta.options.forEach((opcao, index) => {
+                    const radioContainer = document.createElement('div');
+                    radioContainer.classList.add('radio-group');
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.id = `pergunta_${pergunta.id}_opcao_${index}`;
+                    radio.name = pergunta.question; // Nome com o texto da pergunta
+                    radio.value = opcao;
+                    radio.required = true;
+                    const radioLabel = document.createElement('label');
+                    radioLabel.setAttribute('for', radio.id);
+                    radioLabel.textContent = opcao;
+                    radioContainer.appendChild(radio);
+                    radioContainer.appendChild(radioLabel);
+                    div.appendChild(radioContainer);
+                });
+            }
+            container.appendChild(div);
+        });
+    }
+
+    // Ao submeter o formulário de perguntas, atualiza o sessionStorage com os IDs respondidos
+    const perguntasForm = document.getElementById('perguntasForm');
+    perguntasForm.addEventListener('submit', function (event) {
+        const inputs = perguntasForm.querySelectorAll('[id^="pergunta_"]');
+        const respondedIds = [];
+        inputs.forEach(input => {
+            const id = parseInt(input.id.split('_')[1]);
+            respondedIds.push(id);
+        });
+        const hoje = new Date().toLocaleDateString();
+        const savedPerguntas = sessionStorage.getItem('answeredPerguntas');
+        let answered = { date: hoje, ids: [] };
+        if (savedPerguntas) {
+            try {
+                const obj = JSON.parse(savedPerguntas);
+                if (obj.date === hoje) {
+                    answered = obj;
+                }
+            } catch (error) {
+                console.error('Erro ao parsear answeredPerguntas:', error);
+            }
+        }
+        answered.ids = Array.from(new Set(answered.ids.concat(respondedIds)));
+        sessionStorage.setItem('answeredPerguntas', JSON.stringify(answered));
+        // O formulário segue para o Formspree
+    });
+
+    // Chama a função para exibir as perguntas
+    exibirPerguntas();
 });

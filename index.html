@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Versículo do Dia</title>
+    <title>Diário com o Pai</title>
     <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
     <!-- Adicionando o Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>Mãos Limpas e Coração Puro</h1>
         </header>
         <main>
+            <!-- Seção do Versículo e demais conteúdos -->
+            <section class="tema-section">
+                <p class="section-title">📌 Tema</p>
+                <p id="tema"></p>
+            </section>
             <section class="versiculo-section">
                 <p class="section-title">📖 Versículo-chave</p>
                 <blockquote id="versiculo"></blockquote>
@@ -35,12 +44,24 @@
                 <p class="section-title">🙏 Oração do Dia</p>
                 <blockquote id="oracao"></blockquote>
             </section>
+
+            <!-- Nova seção para as Perguntas do Dia -->
+            <section class="perguntas-section">
+                <p class="section-title">❓ Perguntas do Dia</p>
+                <form id="perguntasForm" action="https://formspree.io/f/xnnpbnvz" method="POST">
+                    <div id="perguntasContainer"></div>
+                    <!-- Campo oculto para redirecionamento (opcional) -->
+                    <input type="hidden" name="_next" value="https://seusite.github.io/obrigado.html">
+                    <button type="submit">Enviar Respostas</button>
+                </form>
+            </section>
         </main>
     </div>
 
-<!-- Rodapé -->
+    <!-- Rodapé -->
     <footer style="background-color: #454f31; text-align: center; padding: 20px;">
-        <a href="https://www.instagram.com/zosocreativehouse/" target="_blank" style="color: #9da97e; text-decoration: none;">
+        <a href="https://www.instagram.com/zosocreativehouse/" target="_blank"
+            style="color: #9da97e; text-decoration: none;">
             <i class="fab fa-instagram" style="font-size: 32px; margin-bottom: 10px;"></i>
         </a>
         <p style="color: #9da97e; margin-top: 10px;">
@@ -50,4 +71,5 @@
 
     <script src="index.js"></script>
 </body>
+
 </html>
