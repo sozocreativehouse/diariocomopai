@@ -94,21 +94,28 @@ header h1:hover {
     text-align: center;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     padding: 15px 25px;
-    background-color: rgba(77, 87, 49, 0.7);
+    background-color: transparent;
+    /* Removido o fundo colorido */
     border-radius: 8px;
     display: inline-block;
     max-width: 80%;
     line-height: 1.4;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border: 1px solid rgba(229, 228, 210, 0.3);
+    backdrop-filter: blur(12px);
+    /* Aumentado o blur */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(229, 228, 210, 0.15);
+    /* Borda mais suave */
     transition: all 0.3s ease;
 }
 
 #tema-header:hover {
-    background-color: rgba(77, 87, 49, 0.85);
+    backdrop-filter: blur(16px);
+    /* Efeito mais forte no hover */
+    -webkit-backdrop-filter: blur(16px);
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(229, 228, 210, 0.3);
+    /* Borda mais visível no hover */
 }
 
 .section-title {
@@ -309,6 +316,8 @@ footer p {
     #tema-header {
         font-size: 1.5rem;
         padding: 12px 20px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
 
     .section-title {
@@ -339,6 +348,8 @@ footer p {
     #tema-header {
         font-size: 1.3rem;
         padding: 10px 15px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
     }
 
     .section-title {
