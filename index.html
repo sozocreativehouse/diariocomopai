@@ -7,100 +7,66 @@
     <title>Diário com o Pai</title>
     <link rel="stylesheet" href="index.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Montserrat:wght@300;400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
+    <!-- Adicionando o Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
     <div class="container">
-        <header class="page-header">
-            <div class="header-overlay">
-                <div class="header-content">
-                    <h1>Mãos Limpas e Coração Puro</h1>
-                    <p class="subtitle">Um momento diário de comunhão e reflexão</p>
-                </div>
-            </div>
+        <header>
+            <h1>Mãos Limpas e Coração Puro</h1>
         </header>
-
-        <main class="content-wrapper">
+        <main>
             <!-- Seção do Versículo e demais conteúdos -->
-            <section class="content-section">
-                <div class="section-header">
-                    <i class="fas fa-bookmark section-icon"></i>
-                    <h2 class="section-title">Tema</h2>
-                </div>
-                <p id="tema" class="section-text"></p>
+            <section class="tema-section">
+                <p class="section-title">📌 Tema</p>
+                <p id="tema"></p>
             </section>
-
-            <section class="content-section">
-                <div class="section-header">
-                    <i class="fas fa-bible section-icon"></i>
-                    <h2 class="section-title">Versículo-chave</h2>
-                </div>
-                <blockquote id="versiculo" class="verse-block"></blockquote>
+            <section class="versiculo-section">
+                <p class="section-title">📖 Versículo-chave</p>
+                <blockquote id="versiculo"></blockquote>
             </section>
-
-            <section class="content-section">
-                <div class="section-header">
-                    <i class="fas fa-lightbulb section-icon"></i>
-                    <h2 class="section-title">Reflexão: Preparando-se para Interceder</h2>
-                </div>
-                <p id="reflexao" class="section-text"></p>
+            <section class="reflexao-section">
+                <p class="section-title">📖 Reflexão: Preparando-se para Interceder</p>
+                <p id="reflexao"></p>
             </section>
-
-            <section class="content-section">
-                <div class="section-header">
-                    <i class="fas fa-hands-praying section-icon"></i>
-                    <h2 class="section-title">Como aplicar no meu dia a dia?</h2>
-                </div>
-                <ul id="aplicacao" class="application-list"></ul>
+            <section class="aplicacao-section">
+                <p class="section-title">📌 Como aplicar no meu dia a dia?</p>
+                <ul id="aplicacao"></ul>
             </section>
-
-            <section class="content-section">
-                <div class="section-header">
-                    <i class="fas fa-trophy section-icon"></i>
-                    <h2 class="section-title">Desafio do Dia</h2>
-                </div>
-                <p id="desafio" class="section-text"></p>
+            <section class="desafio-section">
+                <p class="section-title">📌 Desafio do Dia</p>
+                <p id="desafio"></p>
             </section>
-
-            <section class="content-section">
-                <div class="section-header">
-                    <i class="fas fa-pray section-icon"></i>
-                    <h2 class="section-title">Oração do Dia</h2>
-                </div>
-                <blockquote id="oracao" class="prayer-block"></blockquote>
+            <section class="oracao-section">
+                <p class="section-title">🙏 Oração do Dia</p>
+                <blockquote id="oracao"></blockquote>
             </section>
 
             <!-- Seção de Perguntas do Dia -->
-            <section class="content-section">
-                <div class="section-header">
-                    <i class="fas fa-question-circle section-icon"></i>
-                    <h2 class="section-title">Perguntas do Dia</h2>
-                </div>
-                <form id="perguntasForm" action="https://formspree.io/f/xnnpbnvz" method="POST">
-                    <!-- Acesse: https://formspree.io/login -->
-                    <div id="perguntasContainer" class="questions-container"></div>
+            <section class="perguntas-section">
+                <p class="section-title">❓ Perguntas do Dia</p>
+                <form id="perguntasForm" action="https://formspree.io/f/mdkelkgw" method="POST">
+                    <div id="perguntasContainer"></div>
+                    <!-- Campo oculto para redirecionamento (opcional) -->
                     <input type="hidden" name="_next" value="https://seusite.github.io/obrigado.html">
-                    <button type="submit" class="submit-button">
-                        <span>Enviar Respostas</span>
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
+                    <button type="submit">Enviar Respostas</button>
                 </form>
             </section>
         </main>
     </div>
 
-    <footer class="page-footer">
-        <div class="footer-content">
-            <a href="https://www.instagram.com/zosocreativehouse/" target="_blank" class="social-icon">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <p class="footer-quote">
-                "Onde você vê um fim,<br>Jesus vê um novo começo de amor e salvação!"
-            </p>
-        </div>
+    <!-- Rodapé -->
+    <footer style="background-color: #454f31; text-align: center; padding: 20px;">
+        <a href="https://www.instagram.com/zosocreativehouse/" target="_blank"
+            style="color: #9da97e; text-decoration: none;">
+            <i class="fab fa-instagram" style="font-size: 32px; margin-bottom: 10px;"></i>
+        </a>
+        <p style="color: #9da97e; margin-top: 10px;">
+            "Onde você vê um fim,<br>Jesus vê um novo começo de amor e salvação!"
+        </p>
     </footer>
 
     <script src="index.js"></script>
