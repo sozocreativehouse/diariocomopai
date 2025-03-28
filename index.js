@@ -12,7 +12,10 @@ document.addEventListener('DOMContentLoaded', function () {
         temaHeaderElement.textContent = versiculoData.tema;
         versiculoElement.textContent = versiculoData.versiculo;
         reflexaoElement.textContent = versiculoData.reflexao;
-        aplicacaoElement.innerHTML = versiculoData.aplicacao.split('. ').map(item => `<li>${item}</li>`).join('');
+        aplicacaoElement.innerHTML = versiculoData.aplicacao
+            .split('. ')
+            .map(item => `<li>${item}</li>`)
+            .join('');
         desafioElement.textContent = versiculoData.desafio;
         oracaoElement.textContent = versiculoData.oracao;
     }
@@ -72,8 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
         { id: 12, question: "Qual foi o maior desafio espiritual que você enfrentou hoje e como você deu a volta por cima? Compartilha sua história! 🌈", type: "text" }
     ];
 
-
-
     function exibirPerguntas() {
         const hoje = new Date().toLocaleDateString();
         const savedPerguntas = sessionStorage.getItem('answeredPerguntas');
@@ -89,40 +90,34 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         const perguntasDisponiveis = perguntas.filter(q => !answered.includes(q.id));
-        const numeroPerguntas = Math.min(3, perguntasDisponiveis.length);
-        const perguntasSelecionadas = [];
-        while (perguntasSelecionadas.length < numeroPerguntas) {
-            const indiceAleatorio = Math.floor(Math.random() * perguntasDisponiveis.length);
-            const pergunta = perguntasDisponiveis[indiceAleatorio];
-            if (!perguntasSelecionadas.find(q => q.id === pergunta.id)) {
-                perguntasSelecionadas.push(pergunta);
-            }
-        }
+        const perguntaSelecionada = perguntasDisponiveis[Math.floor(Math.random() * perguntasDisponiveis.length)];
+
         const container = document.getElementById('perguntasContainer');
         container.innerHTML = '';
-        perguntasSelecionadas.forEach(pergunta => {
+
+        if (perguntaSelecionada) {
             const div = document.createElement('div');
             div.classList.add('pergunta-item');
 
             const label = document.createElement('label');
-            label.setAttribute('for', `pergunta_${pergunta.id}`);
-            label.textContent = pergunta.question;
+            label.setAttribute('for', `pergunta_${perguntaSelecionada.id}`);
+            label.textContent = perguntaSelecionada.question;
             div.appendChild(label);
 
-            if (pergunta.type === "text") {
+            if (perguntaSelecionada.type === "text") {
                 const textarea = document.createElement('textarea');
-                textarea.id = `pergunta_${pergunta.id}`;
-                textarea.name = pergunta.question;
+                textarea.id = `pergunta_${perguntaSelecionada.id}`;
+                textarea.name = perguntaSelecionada.question;
                 textarea.required = true;
                 div.appendChild(textarea);
-            } else if (pergunta.type === "choice") {
-                pergunta.options.forEach((opcao, index) => {
+            } else if (perguntaSelecionada.type === "choice") {
+                perguntaSelecionada.options.forEach((opcao, index) => {
                     const radioContainer = document.createElement('div');
                     radioContainer.classList.add('radio-group');
                     const radio = document.createElement('input');
                     radio.type = 'radio';
-                    radio.id = `pergunta_${pergunta.id}_opcao_${index}`;
-                    radio.name = pergunta.question;
+                    radio.id = `pergunta_${perguntaSelecionada.id}_opcao_${index}`;
+                    radio.name = perguntaSelecionada.question;
                     radio.value = opcao;
                     radio.required = true;
                     const radioLabel = document.createElement('label');
@@ -134,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
             container.appendChild(div);
-        });
+        }
     }
 
     const perguntasForm = document.getElementById('perguntasForm');
