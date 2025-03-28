@@ -64,17 +64,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const perguntas = [
         { id: 1, question: "Como foi seu dia com Deus? Conta pra gente como a palavra fez seu coração sorrir! 😊", type: "text" },
-        { id: 2, question: "Você sentiu o toque de Deus nessa mensagem? Compartilha o que rolou no seu coração! 💖", type: "text" },
+        { id: 2, question: "Você sentiu o toque de Deus nessa mensagem? Compartilha o que rolou no seu coração!", type: "text" },
         { id: 3, question: "Qual versículo te surpreendeu hoje? Como ele impactou a sua vida? ✨", type: "text" },
         { id: 4, question: "Te rolou algum momento inspirador hoje? Conta mais sobre esse momento especial! 🌟", type: "text" },
         { id: 5, question: "Como foi sua jornada espiritual hoje? Quais aprendizados te deixaram com um sorriso no rosto? 🙂", type: "text" },
         { id: 6, question: "De que jeito você percebeu Deus nas pequenas coisas do seu dia? 🙏", type: "text" },
-        { id: 7, question: "Qual ensinamento da Bíblia fez eco no seu coração hoje? Compartilha com a gente! 💬", type: "text" },
+        { id: 7, question: "Qual ensinamento da Bíblia fez eco no seu coração hoje? Compartilha com a gente!", type: "text" },
         { id: 8, question: "Tem alguma palavra de fé que você gostaria de dividir com seus amigos? Nos conta! 📖", type: "text" },
-        { id: 9, question: "Como a leitura de hoje mexeu com seus pensamentos e sentimentos? Fala pra gente! 🤔", type: "text" },
+        { id: 9, question: "Como a leitura de hoje mexeu com seus pensamentos e sentimentos? Fala pra gente!", type: "text" },
         { id: 10, question: "Você viveu algum momento marcante em que sentiu a presença divina? Detalha essa conexão! ✝️", type: "text" },
         { id: 11, question: "O que te emocionou mais durante sua oração hoje? Conta pra gente essa sensação! ❤️", type: "text" },
-        { id: 12, question: "Qual foi o maior desafio espiritual que você enfrentou hoje e como você deu a volta por cima? Compartilha sua história! 🌈", type: "text" }
+        { id: 12, question: "Qual foi o maior desafio espiritual que você enfrentou hoje e como você deu a volta por cima? Compartilha sua história!", type: "text" }
     ];
 
     function exibirPerguntas() {
