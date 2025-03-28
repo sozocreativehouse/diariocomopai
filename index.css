@@ -95,27 +95,22 @@ header h1:hover {
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     padding: 15px 25px;
     background-color: transparent;
-    /* Removido o fundo colorido */
     border-radius: 8px;
     display: inline-block;
     max-width: 80%;
     line-height: 1.4;
     backdrop-filter: blur(12px);
-    /* Aumentado o blur */
     -webkit-backdrop-filter: blur(12px);
     border: 0px;
-    /* Borda mais suave */
     transition: all 0.3s ease;
 }
 
 #tema-header:hover {
     backdrop-filter: blur(16px);
-    /* Efeito mais forte no hover */
     -webkit-backdrop-filter: blur(16px);
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     border-color: rgba(229, 228, 210, 0.3);
-    /* Borda mais visível no hover */
 }
 
 .section-title {
@@ -181,14 +176,8 @@ blockquote:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-#aplicacao {
-    list-style-type: none;
-    padding-left: 0;
-    margin-top: 20px;
-}
-
-#aplicacao li {
-    font-family: 'Montserrat', sans-serif;
+/* Estilo para os cards de aplicação */
+.aplicacao-card {
     background-color: #f8f9fa;
     margin: 12px 0;
     padding: 15px 20px;
@@ -201,28 +190,9 @@ blockquote:hover {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-#aplicacao li:hover {
+.aplicacao-card:hover {
     transform: translateY(-3px);
     box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.08);
-}
-
-#oracao {
-    font-family: 'Montserrat', sans-serif;
-    font-style: italic;
-    color: #454f31;
-    margin: 25px 0;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    font-size: 1.1rem;
-    line-height: 1.7;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-#oracao:hover {
-    background-color: #f0f0f0;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07);
 }
 
 .pergunta-item {

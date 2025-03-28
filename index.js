@@ -12,9 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
         temaHeaderElement.textContent = versiculoData.tema;
         versiculoElement.textContent = versiculoData.versiculo;
         reflexaoElement.textContent = versiculoData.reflexao;
+        // Aqui, a propriedade "aplicacao" é dividida em linhas usando "\n" e cada linha é renderizada como um card
         aplicacaoElement.innerHTML = versiculoData.aplicacao
-            .split('. ')
-            .map(item => `<li>${item}</li>`)
+            .split('\n')
+            .filter(item => item.trim() !== '')
+            .map(item => `<div class="aplicacao-card">${item.trim()}</div>`)
             .join('');
         desafioElement.textContent = versiculoData.desafio;
         oracaoElement.textContent = versiculoData.oracao;
