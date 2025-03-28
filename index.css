@@ -1,45 +1,30 @@
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Estilos globais */
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: #e5e4d2;
-    /* Tom mais claro para o fundo geral */
     color: #454f31;
-    /* Cor do texto principal: tom mais escuro da paleta */
     line-height: 1.8;
-    /* Aumentei o line-height para melhor leitura */
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px 20px;
-    /* Aumentei padding superior e inferior */
     transition: background-color 0.3s ease;
-    /* Transição suave na cor de fundo do body */
 }
 
 .container {
     background-color: #fff;
-    /* Container branco */
     border-radius: 16px;
-    /* Bordas mais arredondadas */
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-    /* Sombra mais suave e moderna */
     padding: 40px;
-    /* Padding interno maior para respiro */
     max-width: 950px;
-    /* Largura máxima */
     width: 100%;
     margin-bottom: 30px;
-    /* Margem inferior maior */
     opacity: 0.98;
-    /* Ligeira redução da opacidade para um efeito suave */
-    transform: translateY(0);
     transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -49,7 +34,6 @@ body {
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
 }
 
-/* Header moderno */
 header {
     margin-bottom: 40px;
     text-align: center;
@@ -65,6 +49,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 header::before {
@@ -80,7 +65,7 @@ header::before {
 }
 
 header h1,
-header p {
+header #tema-header {
     position: relative;
     z-index: 2;
     color: #e5e4d2;
@@ -101,19 +86,31 @@ header h1:hover {
     transform: scale(1.02);
 }
 
-header p {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.2rem;
-    margin-top: 0;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
-    transition: opacity 0.3s ease;
+#tema-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 20px;
+    text-align: center;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    padding: 15px 25px;
+    background-color: rgba(77, 87, 49, 0.7);
+    border-radius: 8px;
+    display: inline-block;
+    max-width: 80%;
+    line-height: 1.4;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(229, 228, 210, 0.3);
+    transition: all 0.3s ease;
 }
 
-header p:hover {
-    opacity: 0.9;
+#tema-header:hover {
+    background-color: rgba(77, 87, 49, 0.85);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Títulos das seções */
 .section-title {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.8rem;
@@ -141,7 +138,6 @@ header p:hover {
     width: 80px;
 }
 
-/* Blocos de conteúdo */
 section {
     padding-bottom: 30px;
     margin-bottom: 30px;
@@ -159,7 +155,6 @@ section:last-child {
     padding-bottom: 0;
 }
 
-/* Blocos de citação */
 blockquote {
     font-family: 'Montserrat', sans-serif;
     font-style: italic;
@@ -179,7 +174,6 @@ blockquote:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Lista de aplicação */
 #aplicacao {
     list-style-type: none;
     padding-left: 0;
@@ -205,7 +199,6 @@ blockquote:hover {
     box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Oração */
 #oracao {
     font-family: 'Montserrat', sans-serif;
     font-style: italic;
@@ -223,18 +216,6 @@ blockquote:hover {
 #oracao:hover {
     background-color: #f0f0f0;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07);
-}
-
-/* Seção de Perguntas do Dia */
-.perguntas-section {
-    padding-bottom: 30px;
-    margin-bottom: 30px;
-    border-bottom: 1px dashed #e5e4d2;
-    transition: border-color 0.3s ease;
-}
-
-.perguntas-section:hover {
-    border-color: #ccc;
 }
 
 .pergunta-item {
@@ -263,7 +244,6 @@ blockquote:hover {
     resize: vertical;
 }
 
-/* Radio buttons alinhados lado a lado */
 .radio-group {
     display: inline-flex;
     align-items: center;
@@ -278,7 +258,6 @@ blockquote:hover {
     font-size: 1rem;
 }
 
-/* Botão de Envio do Formulário */
 #perguntasForm button[type="submit"] {
     background-color: #5d6840;
     color: #fff;
@@ -296,31 +275,40 @@ blockquote:hover {
     transform: translateY(-2px);
 }
 
-/* Footer */
 footer {
     font-family: 'Montserrat', sans-serif;
     text-align: center;
     padding: 25px;
-    background-color: #e5e4d2;
-    color: #454f31;
-    border-top: none;
+    background-color: #454f31;
+    color: #9da97e;
     width: 100%;
     max-width: 950px;
     margin-top: 30px;
     border-radius: 12px;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.05);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-footer:hover {
-    background-color: #d8d7c7;
-    box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.07);
+footer a {
+    color: #9da97e;
+    text-decoration: none;
 }
 
-/* Responsividade */
+footer i {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+footer p {
+    margin-top: 10px;
+}
+
 @media (max-width: 768px) {
     header h1 {
         font-size: 2.4rem;
+    }
+
+    #tema-header {
+        font-size: 1.5rem;
+        padding: 12px 20px;
     }
 
     .section-title {
@@ -341,15 +329,16 @@ footer:hover {
         padding: 60px 15px;
         min-height: 200px;
     }
-
-    header h1 {
-        font-size: 2.2rem;
-    }
 }
 
 @media (max-width: 480px) {
     header h1 {
         font-size: 2rem;
+    }
+
+    #tema-header {
+        font-size: 1.3rem;
+        padding: 10px 15px;
     }
 
     .section-title {
@@ -368,9 +357,5 @@ footer:hover {
     header {
         padding: 50px 10px;
         min-height: 180px;
-    }
-
-    header h1 {
-        font-size: 1.8rem;
     }
 }

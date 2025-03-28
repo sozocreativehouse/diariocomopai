@@ -1,17 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Elementos do Versículo e demais seções
     const versiculoElement = document.getElementById('versiculo');
     const reflexaoElement = document.getElementById('reflexao');
     const aplicacaoElement = document.getElementById('aplicacao');
     const desafioElement = document.getElementById('desafio');
     const oracaoElement = document.getElementById('oracao');
     const headerTitle = document.querySelector('header h1');
-    const temaElement = document.getElementById('tema');
+    const temaHeaderElement = document.getElementById('tema-header');
 
-    // Função para exibir o versículo e demais conteúdos
     function exibirVersiculo(versiculoData) {
         headerTitle.textContent = versiculoData.titulo;
-        temaElement.textContent = versiculoData.tema;
+        temaHeaderElement.textContent = versiculoData.tema;
         versiculoElement.textContent = versiculoData.versiculo;
         reflexaoElement.textContent = versiculoData.reflexao;
         aplicacaoElement.innerHTML = versiculoData.aplicacao.split('. ').map(item => `<li>${item}</li>`).join('');
@@ -19,14 +17,13 @@ document.addEventListener('DOMContentLoaded', function () {
         oracaoElement.textContent = versiculoData.oracao;
     }
 
-    // Seleção sequencial do versículo usando sessionStorage
     function selecionarVersiculoSequencial(versiculos) {
         const hoje = new Date().toLocaleDateString();
         const savedData = sessionStorage.getItem('versiculoData');
         let index = 0;
         if (savedData) {
             try {
-                const dataObj = JSON.parse(savedData); // { date: string, index: number }
+                const dataObj = JSON.parse(savedData);
                 if (dataObj.date === hoje) {
                     index = dataObj.index;
                 } else {
@@ -41,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
         exibirVersiculo(versiculos[index]);
     }
 
-    // Carrega os versículos
     fetch('index.json')
         .then(response => {
             if (!response.ok) {
@@ -50,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then(versiculos => {
-            console.log('Versículos carregados:', versiculos);
             if (versiculos && Array.isArray(versiculos) && versiculos.length > 0) {
                 selecionarVersiculoSequencial(versiculos);
             } else {
@@ -62,11 +57,6 @@ document.addEventListener('DOMContentLoaded', function () {
             versiculoElement.textContent = 'Erro ao carregar os versículos.';
         });
 
-    // -----------------------------
-    // Seção de Perguntas do Dia
-    // -----------------------------
-
-    // Array com 40 perguntas (cada objeto possui id, question, type e, se for de escolha, opções)
     const perguntas = [
         { id: 1, question: "Deus falou com você através da nossa plataforma hoje?", type: "choice", options: ["Sim", "Não"] },
         { id: 2, question: "Você se considera ansioso?", type: "choice", options: ["Sim", "Não", "Às vezes"] },
@@ -110,7 +100,6 @@ document.addEventListener('DOMContentLoaded', function () {
         { id: 40, question: "Qual foi o maior desafio espiritual que você enfrentou hoje?", type: "text" }
     ];
 
-    // Função para exibir até 3 perguntas (não respondidas hoje) de forma aleatória
     function exibirPerguntas() {
         const hoje = new Date().toLocaleDateString();
         const savedPerguntas = sessionStorage.getItem('answeredPerguntas');
@@ -141,13 +130,11 @@ document.addEventListener('DOMContentLoaded', function () {
             const div = document.createElement('div');
             div.classList.add('pergunta-item');
 
-            // Label com o texto da pergunta
             const label = document.createElement('label');
             label.setAttribute('for', `pergunta_${pergunta.id}`);
             label.textContent = pergunta.question;
             div.appendChild(label);
 
-            // Input: se for text ou radio, usa o texto da pergunta como "name"
             if (pergunta.type === "text") {
                 const textarea = document.createElement('textarea');
                 textarea.id = `pergunta_${pergunta.id}`;
@@ -176,7 +163,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Atualiza o sessionStorage ao submeter o formulário
     const perguntasForm = document.getElementById('perguntasForm');
     perguntasForm.addEventListener('submit', function (event) {
         const inputs = perguntasForm.querySelectorAll('[id^="pergunta_"]');
@@ -200,9 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         answered.ids = Array.from(new Set(answered.ids.concat(respondedIds)));
         sessionStorage.setItem('answeredPerguntas', JSON.stringify(answered));
-        // O formulário seguirá para o Formspree
     });
 
-    // Exibe as perguntas ao carregar
     exibirPerguntas();
 });
