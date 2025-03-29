@@ -86,8 +86,9 @@ header h1:hover {
     transform: scale(1.02);
 }
 
+/* Modificação: Alteração da fonte de #tema-header para 'Montserrat' */
 #tema-header {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.8rem;
     font-weight: 700;
     margin-top: 20px;
@@ -339,5 +340,4 @@ footer p {
         padding: 50px 10px;
         min-height: 180px;
     }
-
 }

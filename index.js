@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
         headerTitle.textContent = versiculoData.titulo;
         temaHeaderElement.textContent = versiculoData.tema;
         versiculoElement.textContent = versiculoData.versiculo;
-        reflexaoElement.textContent = versiculoData.reflexao;
         // Aqui, a propriedade "aplicacao" é dividida em linhas usando "\n" e cada linha é renderizada como um card
         aplicacaoElement.innerHTML = versiculoData.aplicacao
             .split('\n')
@@ -62,19 +61,20 @@ document.addEventListener('DOMContentLoaded', function () {
             versiculoElement.textContent = 'Erro ao carregar os versículos.';
         });
 
+    // Lista de perguntas com linguagem mais formal
     const perguntas = [
-        { id: 1, question: "Como foi seu dia com Deus? Conta pra gente como a palavra fez seu coração sorrir! 😊", type: "text" },
-        { id: 2, question: "Você sentiu o toque de Deus nessa mensagem? Compartilha o que rolou no seu coração!", type: "text" },
-        { id: 3, question: "Qual versículo te surpreendeu hoje? Como ele impactou a sua vida? ✨", type: "text" },
-        { id: 4, question: "Te rolou algum momento inspirador hoje? Conta mais sobre esse momento especial! 🌟", type: "text" },
-        { id: 5, question: "Como foi sua jornada espiritual hoje? Quais aprendizados te deixaram com um sorriso no rosto? 🙂", type: "text" },
-        { id: 6, question: "De que jeito você percebeu Deus nas pequenas coisas do seu dia? 🙏", type: "text" },
-        { id: 7, question: "Qual ensinamento da Bíblia fez eco no seu coração hoje? Compartilha com a gente!", type: "text" },
-        { id: 8, question: "Tem alguma palavra de fé que você gostaria de dividir com seus amigos? Nos conta! 📖", type: "text" },
-        { id: 9, question: "Como a leitura de hoje mexeu com seus pensamentos e sentimentos? Fala pra gente!", type: "text" },
-        { id: 10, question: "Você viveu algum momento marcante em que sentiu a presença divina? Detalha essa conexão! ✝️", type: "text" },
-        { id: 11, question: "O que te emocionou mais durante sua oração hoje? Conta pra gente essa sensação! ❤️", type: "text" },
-        { id: 12, question: "Qual foi o maior desafio espiritual que você enfrentou hoje e como você deu a volta por cima? Compartilha sua história!", type: "text" }
+        { id: 1, question: "Como foi o seu dia dedicado a Deus? Por favor, relate como a mensagem impactou positivamente o seu espírito.", type: "text" },
+        { id: 2, question: "A mensagem despertou em você a percepção da presença divina? Por gentileza, compartilhe suas impressões e sentimentos.", type: "text" },
+        { id: 3, question: "Qual versículo te surpreendeu hoje e de que maneira influenciou sua vida?", type: "text" },
+        { id: 4, question: "Houve algum momento inspirador no decorrer do seu dia? Por favor, descreva detalhadamente essa experiência.", type: "text" },
+        { id: 5, question: "Como foi a sua jornada espiritual hoje? Quais aprendizados te proporcionaram satisfação e otimismo?", type: "text" },
+        { id: 6, question: "De que maneira você observou a presença de Deus nos detalhes do seu dia?", type: "text" },
+        { id: 7, question: "Qual ensinamento bíblico teve maior ressonância em seu coração hoje? Por favor, compartilhe conosco.", type: "text" },
+        { id: 8, question: "Existe alguma mensagem de fé que deseje compartilhar com seus colegas? Por gentileza, relate-a.", type: "text" },
+        { id: 9, question: "De que maneira a leitura realizada hoje influenciou seus pensamentos e emoções? Por favor, relate.", type: "text" },
+        { id: 10, question: "Você experimentou algum momento marcante em que percebeu a presença divina? Por gentileza, descreva essa experiência com detalhes.", type: "text" },
+        { id: 11, question: "O que mais te emocionou durante sua oração hoje? Por favor, compartilhe essa sensação.", type: "text" },
+        { id: 12, question: "Qual foi o maior desafio espiritual que enfrentou hoje e como conseguiu superá-lo? Por gentileza, relate sua experiência.", type: "text" }
     ];
 
     function exibirPerguntas() {
