@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         headerTitle.textContent = versiculoData.titulo;
         temaHeaderElement.textContent = versiculoData.tema;
         versiculoElement.textContent = versiculoData.versiculo;
-        // Aqui, a propriedade "aplicacao" é dividida em linhas usando "\n" e cada linha é renderizada como um card
+        // Divide a propriedade "aplicacao" em linhas e renderiza cada linha como um card
         aplicacaoElement.innerHTML = versiculoData.aplicacao
             .split('\n')
             .filter(item => item.trim() !== '')
@@ -21,25 +21,43 @@ document.addEventListener('DOMContentLoaded', function () {
         oracaoElement.textContent = versiculoData.oracao;
     }
 
+    // Função para selecionar o próximo versículo, incrementando apenas 1 caso a data seja diferente
     function selecionarVersiculoSequencial(versiculos) {
-        const hoje = new Date().toLocaleDateString();
-        const savedData = sessionStorage.getItem('versiculoData');
-        let index = 0;
+        const hoje = new Date();
+        // Zera as horas para comparação apenas de datas
+        hoje.setHours(0, 0, 0, 0);
+
+        let lastDate, lastIndex;
+        const savedData = localStorage.getItem('versiculoData');
         if (savedData) {
             try {
                 const dataObj = JSON.parse(savedData);
-                if (dataObj.date === hoje) {
-                    index = dataObj.index;
-                } else {
-                    index = (dataObj.index + 1) % versiculos.length;
-                }
+                // A data é armazenada em formato ISO
+                lastDate = new Date(dataObj.date);
+                lastDate.setHours(0, 0, 0, 0);
+                lastIndex = dataObj.index;
             } catch (error) {
-                console.error('Erro ao fazer parsing do sessionStorage:', error);
-                index = 0;
+                console.error('Erro ao parsear os dados do localStorage:', error);
+                lastDate = hoje;
+                lastIndex = 0;
             }
+        } else {
+            lastDate = hoje;
+            lastIndex = 0;
         }
-        sessionStorage.setItem('versiculoData', JSON.stringify({ date: hoje, index: index }));
-        exibirVersiculo(versiculos[index]);
+
+        // Se a data atual for diferente da última data armazenada, incrementa o índice em 1
+        let novoIndex = lastIndex;
+        if (hoje.getTime() > lastDate.getTime()) {
+            novoIndex = (lastIndex + 1) % versiculos.length;
+        }
+        // Armazena a data atual e o novo índice
+        localStorage.setItem('versiculoData', JSON.stringify({
+            date: hoje.toISOString(),
+            index: novoIndex
+        }));
+
+        exibirVersiculo(versiculos[novoIndex]);
     }
 
     fetch('index.json')
@@ -65,26 +83,26 @@ document.addEventListener('DOMContentLoaded', function () {
     const perguntas = [
         { id: 1, question: "Como foi o seu dia dedicado a Deus? Por favor, relate como a mensagem impactou positivamente o seu espírito.", type: "text" },
         { id: 2, question: "A mensagem despertou em você a percepção da presença divina? Por gentileza, compartilhe suas impressões e sentimentos.", type: "text" },
-        { id: 3, question: "Qual versículo te surpreendeu hoje e de que maneira influenciou sua vida?", type: "text" },
+        { id: 3, question: "Qual versículo lhe surpreendeu hoje e de que maneira influenciou sua vida?", type: "text" },
         { id: 4, question: "Houve algum momento inspirador no decorrer do seu dia? Por favor, descreva detalhadamente essa experiência.", type: "text" },
-        { id: 5, question: "Como foi a sua jornada espiritual hoje? Quais aprendizados te proporcionaram satisfação e otimismo?", type: "text" },
+        { id: 5, question: "Como foi a sua jornada espiritual hoje? Quais aprendizados lhe proporcionaram satisfação e otimismo?", type: "text" },
         { id: 6, question: "De que maneira você observou a presença de Deus nos detalhes do seu dia?", type: "text" },
         { id: 7, question: "Qual ensinamento bíblico teve maior ressonância em seu coração hoje? Por favor, compartilhe conosco.", type: "text" },
         { id: 8, question: "Existe alguma mensagem de fé que deseje compartilhar com seus colegas? Por gentileza, relate-a.", type: "text" },
         { id: 9, question: "De que maneira a leitura realizada hoje influenciou seus pensamentos e emoções? Por favor, relate.", type: "text" },
         { id: 10, question: "Você experimentou algum momento marcante em que percebeu a presença divina? Por gentileza, descreva essa experiência com detalhes.", type: "text" },
-        { id: 11, question: "O que mais te emocionou durante sua oração hoje? Por favor, compartilhe essa sensação.", type: "text" },
+        { id: 11, question: "O que mais lhe emocionou durante sua oração hoje? Por favor, compartilhe essa sensação.", type: "text" },
         { id: 12, question: "Qual foi o maior desafio espiritual que enfrentou hoje e como conseguiu superá-lo? Por gentileza, relate sua experiência.", type: "text" }
     ];
 
     function exibirPerguntas() {
-        const hoje = new Date().toLocaleDateString();
-        const savedPerguntas = sessionStorage.getItem('answeredPerguntas');
+        const hojeString = new Date().toLocaleDateString();
+        const savedPerguntas = localStorage.getItem('answeredPerguntas');
         let answered = [];
         if (savedPerguntas) {
             try {
                 const obj = JSON.parse(savedPerguntas);
-                if (obj.date === hoje) {
+                if (obj.date === hojeString) {
                     answered = obj.ids;
                 }
             } catch (error) {
@@ -142,13 +160,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const id = parseInt(input.id.split('_')[1]);
             respondedIds.push(id);
         });
-        const hoje = new Date().toLocaleDateString();
-        const savedPerguntas = sessionStorage.getItem('answeredPerguntas');
-        let answered = { date: hoje, ids: [] };
+        const hojeString = new Date().toLocaleDateString();
+        const savedPerguntas = localStorage.getItem('answeredPerguntas');
+        let answered = { date: hojeString, ids: [] };
         if (savedPerguntas) {
             try {
                 const obj = JSON.parse(savedPerguntas);
-                if (obj.date === hoje) {
+                if (obj.date === hojeString) {
                     answered = obj;
                 }
             } catch (error) {
@@ -156,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         answered.ids = Array.from(new Set(answered.ids.concat(respondedIds)));
-        sessionStorage.setItem('answeredPerguntas', JSON.stringify(answered));
+        localStorage.setItem('answeredPerguntas', JSON.stringify(answered));
     });
 
     exibirPerguntas();
