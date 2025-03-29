@@ -2,67 +2,81 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Desafio Mãe e Filho - Conexão</title>
-  <link rel="stylesheet" href="index.css">
-  <link rel="icon" type="image/png" href="fiveicon.png">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diário com o Pai</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" type="image/png" href="fiveicon.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <h1>Desafio – 30 Dias de Conexão entre Mãe e Filho</h1>
-      <!-- Aqui será exibido o nome da semana -->
-      <div id="tema-header"></div>
-    </header>
-    <main>
-      <section class="mensagem-section">
-        <p class="section-title">
-          <i class="fas fa-comments" style="color: #5d6840; font-size: 0.9em;"></i> Mensagem do Dia
+    <div class="container">
+        <header>
+            <h1>Mãos Limpas e Coração Puro</h1>
+            <div id="tema-header"></div>
+        </header>
+        <main>
+            <section class="versiculo-section">
+                <p class="section-title">
+                    <i class="fas fa-book-open" style="color: #5d6840; font-size: 0.9em;"></i> Versículo-chave
+                </p>
+                <blockquote id="versiculo"></blockquote>
+            </section>
+            <section class="reflexao-section">
+                <p class="section-title">
+                    <i class="fas fa-brain" style="color: #5d6840; font-size: 0.9em;"></i> Reflexão: Preparando-se para
+                    Interceder
+                </p>
+                <p id="reflexao"></p>
+            </section>
+            <section class="aplicacao-section">
+                <p class="section-title">
+                    <i class="fas fa-tasks" style="color: #5d6840; font-size: 0.9em;"></i> Como aplicar no meu dia a
+                    dia?
+                </p>
+                <div id="aplicacao"></div>
+            </section>
+            <section class="desafio-section">
+                <p class="section-title">
+                    <i class="fas fa-bullseye" style="color: #5d6840; font-size: 0.9em;"></i> Desafio do Dia
+                </p>
+                <p id="desafio"></p>
+            </section>
+            <section class="oracao-section">
+                <p class="section-title">
+                    <i class="fas fa-hands-praying" style="color: #5d6840; font-size: 0.9em;"></i> Oração do Dia
+                </p>
+                <blockquote id="oracao"></blockquote>
+            </section>
+
+            <section class="perguntas-section">
+                <p class="section-title">
+                    <i class="fas fa-question-circle" style="color: #5d6840; font-size: 0.9em;"></i> Conte sua
+                    Experiência
+                </p>
+                <form id="perguntasForm" action="https://formspree.io/f/mdkelkgw" method="POST">
+                    <div id="perguntasContainer"></div>
+                    <input type="hidden" name="_next" value="https://seusite.github.io/obrigado.html">
+                    <button type="submit">Enviar Respostas</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <a href="https://www.instagram.com/zosocreativehouse/" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <p>"Onde você vê um fim,<br>Jesus vê um novo começo de amor e salvação!"</p>
+        <p class="developer" style="font-size: 0.6em;">Sozo Creative House - Um lugar de criatividade inspirada por Deus
         </p>
-        <blockquote id="mensagem"></blockquote>
-      </section>
-      <section class="desafio-section">
-        <p class="section-title">
-          <i class="fas fa-bullseye" style="color: #5d6840; font-size: 0.9em;"></i> Desafio do Dia
-        </p>
-        <p id="desafio"></p>
-      </section>
-      <nav class="navigation">
-        <button id="prev-btn"><i class="fas fa-chevron-left"></i> Anterior</button>
-        <span id="contador"></span>
-        <button id="next-btn">Próximo <i class="fas fa-chevron-right"></i></button>
-      </nav>
-      <section class="experiencia-section">
-        <p class="section-title">
-          <i class="fas fa-question-circle" style="color: #5d6840; font-size: 0.9em;"></i> Conte sua Experiência
-        </p>
-        <form id="experienciaForm" action="https://formspree.io/f/seuformid" method="POST">
-          <div id="experienciaContainer">
-            <div class="experiencia-item">
-              <label for="experiencia_text">Como foi o dia de vocês?</label>
-              <textarea id="experiencia_text" name="experiencia_text" required></textarea>
-            </div>
-          </div>
-          <input type="hidden" name="_next" value="obrigado.html">
-          <button type="submit">Enviar Resposta</button>
-        </form>
-      </section>
-    </main>
-  </div>
-  <footer>
-    <a href="https://www.instagram.com/sozocreativehouse/?igsh=YzB6cnpyOHR5dmps#" target="_blank">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <p>"Conectando corações a cada dia!"</p>
-    <p class="developer" style="font-size: 0.6em;">Sozo Creative House - Criatividade e Amor em Família</p>
-  </footer>
-  <script src="index.js"></script>
+    </footer>
+
+    <script src="index.js"></script>
 </body>
 
 </html>
