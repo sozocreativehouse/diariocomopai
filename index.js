@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
         headerTitle.textContent = versiculoData.titulo;
         temaHeaderElement.textContent = versiculoData.tema;
         versiculoElement.textContent = versiculoData.versiculo;
-        // Divide a propriedade "aplicacao" em linhas e renderiza cada linha como um card
+        // Converte \n em <br> para preservar as quebras de linha
+        reflexaoElement.innerHTML = versiculoData.reflexao.replace(/\n/g, '<br>');
         aplicacaoElement.innerHTML = versiculoData.aplicacao
             .split('\n')
             .filter(item => item.trim() !== '')
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
         desafioElement.textContent = versiculoData.desafio;
         oracaoElement.textContent = versiculoData.oracao;
     }
-
+    
     // Função para selecionar o próximo versículo, incrementando apenas 1 caso a data seja diferente
     function selecionarVersiculoSequencial(versiculos) {
         const hoje = new Date();
