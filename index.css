@@ -86,10 +86,10 @@ header h1:hover {
     transform: scale(1.02);
 }
 
-/* Modificação: Alteração da fonte de #tema-header para 'Montserrat' */
+/* Modificação: Aumentando a fonte de #tema-header */
 #tema-header {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.8rem;
+    font-size: 2.2rem; /* Aumentado de 1.8rem para 2.2rem */
     font-weight: 700;
     margin-top: 20px;
     text-align: center;
@@ -285,7 +285,7 @@ footer p {
     }
 
     #tema-header {
-        font-size: 1.5rem;
+        font-size: 1.8rem; /* Aumentado de 1.5rem para 1.8rem */
         padding: 12px 20px;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
@@ -317,7 +317,7 @@ footer p {
     }
 
     #tema-header {
-        font-size: 1.3rem;
+        font-size: 1.6rem; /* Aumentado de 1.3rem para 1.6rem */
         padding: 10px 15px;
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
